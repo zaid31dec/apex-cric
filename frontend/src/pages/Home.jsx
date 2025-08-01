@@ -1,152 +1,162 @@
 // src/pages/Home.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { 
-  FaFacebook, FaTwitter, FaInstagram, FaStar, 
-  FaPhone, FaEnvelope, FaMapMarkerAlt, FaArrowRight,
-  FaChevronLeft, FaChevronRight
+import {
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+  FaStar,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaArrowRight,
+  FaChevronLeft,
+  FaChevronRight,
 } from "react-icons/fa";
-import BackgroundImage from '../temp/backgroundImage.jpg'
+import BackgroundImage from "../temp/backgroundImage.jpg";
+import handle from "../temp/handle.png";
+import profile from "../temp/profile.png";
 
 const Home = () => {
   // Mock data for demonstration
   const services = [
     {
       title: "Bat Handle Replacement",
-      image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y3JpY2tldCUyMGJhdCUyMGRhbWFnZWR8ZW58MHx8MHx8fDA%3D",
+      image: `${handle}`,
       desc: "Professional replacement of worn or broken handles",
-      link: "/service/bat-handle"
+      link: "/service/bat-handle",
     },
     {
       title: "Toe Guard Installation",
-      image: "https://images.unsplash.com/photo-1624449950949-5b9a2b7a3d8c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JpY2tldCUyMGdsb3ZlJTIwZGFtYWdlZHxlbnwwfHwwfHx8MA%3D%3D",
+      image: `${handle}`,
       desc: "Protect your bat from moisture and damage",
-      link: "/service/toe-guard"
+      link: "/service/toe-guard",
     },
     {
       title: "Face Restoration",
-      image: "https://images.unsplash.com/photo-1593359677869-4a3e9a7a9d7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JpY2tldCUyMGJhdCUyMHJlcGFpcmVkfGVufDB8fDB8fHww",
+      image: `${handle}`,
       desc: "Remove scratches and restore the playing surface",
-      link: "/service/face-restoration"
+      link: "/service/face-restoration",
     },
     {
       title: "Glove Re-palming",
-      image: "https://images.unsplash.com/photo-1624449950949-5b9a2b7a3d8c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JpY2tldCUyMGdsb3ZlJTIwcmVwYWlyZWR8ZW58MHx8MHx8fDA%3D",
+      image: `${handle}`,
       desc: "Replace worn palm padding for better grip",
-      link: "/service/glove-repalming"
+      link: "/service/glove-repalming",
     },
   ];
 
-  const galleryImages = [
-    "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y3JpY2tldCUyMGJhdCUyMGRhbWFnZWR8ZW58MHx8MHx8fDA%3D",
-    "https://images.unsplash.com/photo-1593359677869-4a3e9a7a9d7e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JpY2tldCUyMGJhdCUyMHJlcGFpcmVkfGVufDB8fDB8fHww",
-    "https://images.unsplash.com/photo-1624449950949-5b9a2b7a3d8c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JpY2tldCUyMGdsb3ZlJTIwZGFtYWdlZHxlbnwwfHwwfHx8MA%3D%3D",
-    "https://images.unsplash.com/photo-1624449950949-5b9a2b7a3d8c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JpY2tldCUyMGdsb3ZlJTIwcmVwYWlyZWR8ZW58MHx8MHx8fDA%3D",
-    "https://images.unsplash.com/photo-1560272564-c83ee6d4431d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y3JpY2tldCUyMGJhdHxlbnwwfHwwfHx8MA%3D%3D",
-    "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y3JpY2tldCUyMGJhdHxlbnwwfHwwfHx8MA%3D%3D"
-  ];
+  const galleryImages = [`${handle}`, `${handle}`, `${handle}`, `${handle}`];
 
   const testimonials = [
     {
       name: "David Warner",
+      image: `${profile}`,
       role: "Professional Cricketer",
       text: "My bat feels like new after the repair. Amazing craftsmanship!",
-      rating: 5
+      rating: 5,
     },
     {
       name: "Virat Kohli",
+      image: `${profile}`,
       role: "Indian Player",
       text: "Fast turnaround and excellent quality. Highly recommended!",
-      rating: 5 
+      rating: 5,
     },
     {
       name: "Kane Williamson",
+      image: `${profile}`,
       role: "New Zealand Player",
       text: "Saved my favorite bat that I thought was beyond repair.",
-      rating: 5
+      rating: 5,
     },
     {
       name: "Steve Smith",
+      image: `${profile}`,
       role: "Australian Player",
       text: "The glove repair service extended the life of my favorite gloves by years.",
-      rating: 5
+      rating: 5,
     },
     {
       name: "Joe Root",
+      image: `${profile}`,
       role: "England Player",
       text: "Professional service with attention to detail. Will use again!",
-      rating: 5
+      rating: 5,
     },
   ];
 
   // Testimonial carousel state
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const testimonialInterval = useRef(null);
-  
+
   // Start auto rotation of testimonials
   useEffect(() => {
     testimonialInterval.current = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
-    
+
     return () => {
       if (testimonialInterval.current) {
         clearInterval(testimonialInterval.current);
       }
     };
   }, [testimonials.length]);
-  
+
   const nextTestimonial = () => {
-    setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     resetInterval();
   };
-  
+
   const prevTestimonial = () => {
-    setCurrentTestimonial(prev => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
     resetInterval();
   };
-  
+
   const resetInterval = () => {
     if (testimonialInterval.current) {
       clearInterval(testimonialInterval.current);
     }
     testimonialInterval.current = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
   };
 
   return (
     <div className="font-sans">
       {/* Hero Section with Background Image */}
-      <section 
-      className="relative py-32 px-4 text-white "
-      style={{
-        backgroundImage: `url(${BackgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      {/* Stronger Dark Overlay */}
-      {/* <div className="absolute inset-0 bg-black bg-opacity-80"></div> */}
+      <section
+        className="relative py-32 px-4 text-white "
+        style={{
+          backgroundImage: `url(${BackgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* Stronger Dark Overlay */}
+        {/* <div className="absolute inset-0 bg-black bg-opacity-80"></div> */}
 
-      <div className="relative max-w-6xl mx-auto text-center z-10">
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 drop-shadow-lg">
-          Professional Cricket Equipment Repair
-        </h1>
-        <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto drop-shadow-lg opacity-90">
-          Restore your bats and gloves to peak performance with our expert repair services. Trusted by professionals worldwide.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            to="/repair"
-            className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded-lg text-lg transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            Get Your Bat Repaired
-          </Link>
+        <div className="relative max-w-6xl mx-auto text-center z-10">
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6 drop-shadow-lg">
+            Professional Cricket Equipment Repair
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto drop-shadow-lg opacity-90">
+            Restore your bats and gloves to peak performance with our expert
+            repair services. Trusted by professionals worldwide.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/repair"
+              className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 md:py-4 md:px-10 rounded-lg text-lg transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Get Your Bat Repaired
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Services Section */}
       <section className="py-16 px-4 bg-gray-50">
@@ -155,7 +165,8 @@ const Home = () => {
             Our Services
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            We specialize in all types of cricket equipment repairs to extend the life of your gear and improve performance.
+            We specialize in all types of cricket equipment repairs to extend
+            the life of your gear and improve performance.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -175,11 +186,11 @@ const Home = () => {
                   {service.title}
                 </h3>
                 <p className="text-gray-600 mb-4 flex-grow">{service.desc}</p>
-                <Link 
-                  to={service.link} 
+                <Link
+                  to={service.link}
                   className="text-cyan-700 font-medium flex items-center justify-end hover:text-cyan-900"
                 >
-                  Learn more <FaArrowRight className="ml-2" />
+                  More <FaArrowRight className="ml-2" />
                 </Link>
               </div>
             ))}
@@ -197,24 +208,24 @@ const Home = () => {
             See our craftsmanship in action through our repair gallery
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             {galleryImages.slice(0, 6).map((image, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="overflow-hidden rounded-xl shadow-lg transform transition duration-500 hover:scale-105"
               >
-                <img 
-                  src={image} 
-                  alt={`Repair example ${index + 1}`} 
+                <img
+                  src={image}
+                  alt={`Repair example ${index + 1}`}
                   className="w-full h-64 object-cover"
                 />
               </div>
             ))}
           </div>
-          
+
           <div className="text-center">
-            <Link 
-              to="/gallery" 
+            <Link
+              to="/gallery"
               className="inline-block bg-cyan-700 hover:bg-cyan-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300 shadow-lg hover:shadow-xl"
             >
               View Full Gallery
@@ -235,46 +246,54 @@ const Home = () => {
 
           <div className="relative bg-white text-gray-800 rounded-xl shadow-xl p-8 min-h-[300px]">
             {/* Navigation Arrows */}
-            <button 
+            <button
               onClick={prevTestimonial}
               className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-cyan-700 text-white p-3 rounded-full hover:bg-cyan-600 transition duration-300 z-10"
               aria-label="Previous testimonial"
             >
               <FaChevronLeft />
             </button>
-            
-            <button 
+
+            <button
               onClick={nextTestimonial}
               className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-cyan-700 text-white p-3 rounded-full hover:bg-cyan-600 transition duration-300 z-10"
               aria-label="Next testimonial"
             >
               <FaChevronRight />
             </button>
-            
+
             {/* Testimonial Content */}
             <div className="text-center px-8">
               <div className="flex justify-center mb-6">
-                <div className="bg-gray-200 border-2 border-dashed rounded-xl w-20 h-20" />
+                <div className="border-2 border-dashed rounded w-20 h-20 overflow-hidden p-0.5">
+                  <img
+                    src={testimonials[currentTestimonial].image}
+                    alt="profile"
+                    className="w-full h-full object-cover rounded"
+                  />
+                </div>
               </div>
-              
+
               <p className="text-xl italic mb-6">
                 "{testimonials[currentTestimonial].text}"
               </p>
-              
+
               <h4 className="font-bold text-xl mb-1">
                 {testimonials[currentTestimonial].name}
               </h4>
               <p className="text-cyan-600 mb-4">
                 {testimonials[currentTestimonial].role}
               </p>
-              
+
               <div className="flex justify-center text-amber-400">
-                {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                  <FaStar key={i} className="w-6 h-6 fill-current mx-1" />
-                ))}
+                {[...Array(testimonials[currentTestimonial].rating)].map(
+                  (_, i) => (
+                    <FaStar key={i} className="w-6 h-6 fill-current mx-1" />
+                  )
+                )}
               </div>
             </div>
-            
+
             {/* Indicators */}
             <div className="flex justify-center mt-8">
               {testimonials.map((_, index) => (
@@ -285,7 +304,7 @@ const Home = () => {
                     resetInterval();
                   }}
                   className={`w-3 h-3 mx-1 rounded-full ${
-                    index === currentTestimonial ? 'bg-cyan-700' : 'bg-gray-300'
+                    index === currentTestimonial ? "bg-cyan-700" : "bg-gray-300"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -326,7 +345,8 @@ const Home = () => {
             Ready to Restore Your Cricket Gear?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Get professional repair services with fast turnaround and guaranteed satisfaction.
+            Get professional repair services with fast turnaround and guaranteed
+            satisfaction.
           </p>
           <Link
             to="/repair"
@@ -349,13 +369,22 @@ const Home = () => {
                 Professional cricket equipment restoration since 2023.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   <FaFacebook className="h-6 w-6" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   <FaInstagram className="h-6 w-6" />
                 </a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a
+                  href="#"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   <FaTwitter className="h-6 w-6" />
                 </a>
               </div>
@@ -367,22 +396,34 @@ const Home = () => {
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/service/bat-repair" className="text-gray-400 hover:text-white transition-colors">
+                  <Link
+                    to="/service/bat-repair"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     Bat Repair
                   </Link>
                 </li>
                 <li>
-                  <Link to="/service/glove-repair" className="text-gray-400 hover:text-white transition-colors">  
+                  <Link
+                    to="/service/glove-repair"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     Glove Repair
                   </Link>
                 </li>
                 <li>
-                  <Link to="/service/restringing" className="text-gray-400 hover:text-white transition-colors">
+                  <Link
+                    to="/service/restringing"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     Restringing
                   </Link>
                 </li>
                 <li>
-                  <Link to="/service/customization" className="text-gray-400 hover:text-white transition-colors">
+                  <Link
+                    to="/service/customization"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     Customization
                   </Link>
                 </li>
@@ -395,27 +436,42 @@ const Home = () => {
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <Link to="/" className="text-gray-400 hover:text-white transition-colors">
+                  <Link
+                    to="/"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="text-gray-400 hover:text-white transition-colors">
+                  <Link
+                    to="/about"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link to="/services" className="text-gray-400 hover:text-white transition-colors">
+                  <Link
+                    to="/services"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     Services
                   </Link>
                 </li>
                 <li>
-                  <Link to="/gallery" className="text-gray-400 hover:text-white transition-colors">
+                  <Link
+                    to="/gallery"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     Gallery
                   </Link>
                 </li>
                 <li>
-                  <Link to="/contact" className="text-gray-400 hover:text-white transition-colors">
+                  <Link
+                    to="/contact"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
                     Contact
                   </Link>
                 </li>
@@ -429,7 +485,9 @@ const Home = () => {
               <ul className="space-y-3 text-gray-400">
                 <li className="flex items-start">
                   <FaMapMarkerAlt className="mt-1 mr-2 text-amber-500 flex-shrink-0" />
-                  <span>Jarahra Road, Indira Nagar, Lucknow, Uttar Pradesh 226016</span>
+                  <span>
+                    Jarahra Road, Indira Nagar, Lucknow, Uttar Pradesh 226016
+                  </span>
                 </li>
                 <li className="flex items-center">
                   <FaPhone className="mr-2 text-amber-500 flex-shrink-0" />
@@ -440,7 +498,7 @@ const Home = () => {
                   <span>info@batcraftrepairs.com</span>
                 </li>
               </ul>
-              
+
               {/* Google Maps Embed */}
               <div className="mt-4 rounded-lg overflow-hidden">
                 <iframe
@@ -456,10 +514,11 @@ const Home = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="border-t border-gray-800 pt-8 text-center text-gray-500">
             <p>
-              © {new Date().getFullYear()} BatCraft Repairs. All rights reserved.
+              © {new Date().getFullYear()} BatCraft Repairs. All rights
+              reserved.
             </p>
           </div>
         </div>
